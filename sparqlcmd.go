@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-func queryEntities(query string) ([][]string, error) {
+func process(query string) ([][]string, error) {
 	endpoint := "https://query.wikidata.org/bigdata/namespace/wdq/sparql?"
 	full := endpoint + "query=" + url.QueryEscape(query) + "&format=json"
 	req, err := http.NewRequest("POST", full, nil)
@@ -63,7 +63,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	result, err := queryEntities(string(query))
+	result, err := process(string(query))
 	if err != nil {
 		panic(err)
 	}
