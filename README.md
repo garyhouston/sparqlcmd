@@ -17,14 +17,16 @@ WHERE
 type:
 sparqlcmd < cats
 
-to get output like:
+to get output like
 
-> "http://www.wikidata.org/entity/Q28114535" "Mr. White"
-> "http://www.wikidata.org/entity/Q28665865" "Мyka"
-> "http://www.wikidata.org/entity/Q28792126" "Gli"
-> "http://www.wikidata.org/entity/Q30600575" "Orlando"
-> "http://www.wikidata.org/entity/Q42442324" "Kiisu Miisu"
-> "http://www.wikidata.org/entity/Q43260736" "Paddles"
+```
+"http://www.wikidata.org/entity/Q28114535" "Mr. White"
+"http://www.wikidata.org/entity/Q28665865" "Мyka"
+"http://www.wikidata.org/entity/Q28792126" "Gli"
+"http://www.wikidata.org/entity/Q30600575" "Orlando"
+"http://www.wikidata.org/entity/Q42442324" "Kiisu Miisu"
+"http://www.wikidata.org/entity/Q43260736" "Paddles"
+```
 
 ## Installation
 
