@@ -1,5 +1,5 @@
 # sparqlcmd
-sparqlcmd is a simple Go program that sends a Sparql query to Wikidata and writes the result to stdout.
+sparqlcmd is a simple Go program that sends a SPARQL query to Wikidata and writes the result to stdout.
 
 ## Usage
 
