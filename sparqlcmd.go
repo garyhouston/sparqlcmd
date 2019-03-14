@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/antonholmquist/jason"
 	"io/ioutil"
@@ -10,13 +11,17 @@ import (
 )
 
 func process(query string) error {
-	endpoint := "https://query.wikidata.org/bigdata/namespace/wdq/sparql?"
-	full := endpoint + "query=" + url.QueryEscape(query) + "&format=json"
-	req, err := http.NewRequest("POST", full, nil)
+	endpoint := "https://query.wikidata.org/bigdata/namespace/wdq/sparql"
+	form := url.Values{}
+	form.Set("format", "json")
+	form.Set("query", query)
+	reqBody := bytes.NewBuffer([]byte(form.Encode()))
+	req, err := http.NewRequest("POST", endpoint, reqBody)
 	if err != nil {
 		return err
 	}
 	req.Header.Add("User-Agent", "sparqlcmd")
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return err
