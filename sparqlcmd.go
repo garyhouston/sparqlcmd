@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/antonholmquist/jason"
-	"os"
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"os"
 )
 
 func queryEntities(query string) ([][]string, error) {
