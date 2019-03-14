@@ -5,7 +5,7 @@ sparqlcmd is a simple Go program that sends a Sparql query to Wikidata and write
 
 It reads the query from stdin. E.g., with a file "cats" containing:
 
-​SELECT ?item ?itemLabel 
+SELECT ?item ?itemLabel 
 WHERE 
 {
   ?item wdt:P31 wd:Q146.
