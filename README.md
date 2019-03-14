@@ -15,7 +15,8 @@ WHERE
 ```
 
 type:
-sparqlcmd < cats
+
+./sparqlcmd < cats
 
 to get output like
 
