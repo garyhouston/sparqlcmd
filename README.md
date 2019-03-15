@@ -31,5 +31,4 @@ to get output like
 
 ## Installation
 
-Can be built with "go build" within the source directory.
-
+Can be built with "go build" within the source directory, using a version of Go with module support (1.11 or later). Older versions may differ.
