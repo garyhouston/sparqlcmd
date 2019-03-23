@@ -29,6 +29,26 @@ to get output like
 "http://www.wikidata.org/entity/Q43260736" "Paddles"
 ```
 
+## Output
+
+For each matching record, a line of output if produced, terminated with a newline character. Each field is written as a string, quoted with double quotes. Fields are separated with spaces. Double quotes and backslashes in field strings are escaped with a leading backslash.
+
+The output can be read in Go with something like:
+
+```
+for {
+   var a, b, c string
+   _, err := fmt.Fscanf(stream, "%q %q %q\n", &a, &b, &c)
+   if err == io.EOF {
+      break
+   }
+   if err != nil {
+      return err
+   }
+   ...
+}
+```
+
 ## Installation
 
 Can be built with "go build" within the source directory, using a version of Go with module support (1.11 or later). Older versions may differ.
