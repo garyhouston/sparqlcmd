@@ -31,7 +31,7 @@ to get output like
 
 ## Output
 
-For each matching record, a line of output if produced, terminated with a newline character. Each field is written as a string, quoted with double quotes. Fields are separated with spaces. Double quotes and backslashes in field strings are escaped with a leading backslash.
+For each matching record, a line of output is produced, terminated with a newline character. Each field is written as a string, quoted with double quotes. Fields are separated with spaces. Double quotes and backslashes in field strings are escaped with a leading backslash.
 
 The output can be read in Go with something like:
 
