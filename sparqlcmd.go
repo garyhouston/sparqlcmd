@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/antonholmquist/jason"
+	"github.com/valyala/fastjson"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -31,29 +31,17 @@ func process(query string) error {
 	if err != nil {
 		return err
 	}
-	json, err := jason.NewObjectFromBytes(body)
+	var parser fastjson.Parser
+	json, err := parser.Parse(string(body))
 	if err != nil {
 		return err
 	}
-	vars, err := json.GetStringArray("head", "vars")
-	if err != nil {
-		return err
-	}
-	bindings, err := json.GetObjectArray("results", "bindings")
-	if err != nil {
-		return err
-	}
+	vars := json.GetArray("head", "vars")
+	bindings := json.GetArray("results", "bindings")
 	for i := range bindings {
-		obj, err := bindings[i].Object()
-		if err != nil {
-			return err
-		}
 		sp := ""
 		for j := range vars {
-			val, err := obj.GetString(vars[j], "value")
-			if err != nil {
-				return err
-			}
+			val := bindings[i].GetStringBytes(string(vars[j].GetStringBytes()), "value")
 			fmt.Printf("%s%q", sp, val)
 			sp = " "
 		}

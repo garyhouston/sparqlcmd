@@ -1,3 +1,5 @@
 module github.com/garyhouston/sparqlcmd
 
-require github.com/antonholmquist/jason v1.0.0
+go 1.13
+
+require github.com/valyala/fastjson v1.4.1
