@@ -21,34 +21,44 @@ type:
 to get output like
 
 ```
-"http://www.wikidata.org/entity/Q28114535" "Mr. White"
-"http://www.wikidata.org/entity/Q28665865" "Мyka"
-"http://www.wikidata.org/entity/Q28792126" "Gli"
-"http://www.wikidata.org/entity/Q30600575" "Orlando"
-"http://www.wikidata.org/entity/Q42442324" "Kiisu Miisu"
-"http://www.wikidata.org/entity/Q43260736" "Paddles"
+http://www.wikidata.org/entity/Q28114535,Mr. White
+http://www.wikidata.org/entity/Q28665865,Myka
+http://www.wikidata.org/entity/Q28792126,Gli
+http://www.wikidata.org/entity/Q30600575,Orlando
+http://www.wikidata.org/entity/Q42442324,Kiisu Miisu
+http://www.wikidata.org/entity/Q43260736,Paddles
 ```
 
 ## Output
 
-For each matching record, a line of output is produced, terminated with a newline character. Each field is written as a string, quoted with double quotes. Fields are separated with spaces. Double quotes and backslashes in field strings are escaped with a leading backslash.
-
-The output can be read in Go with something like:
+The output is in comma-separated values (CSV) format. It can be read in Go with something like:
 
 ```
-for {
-   var a, b, c string
-   _, err := fmt.Fscanf(stream, "%q %q %q\n", &a, &b, &c)
-   if err == io.EOF {
-      break
-   }
-   if err != nil {
-      return err
-   }
-   ...
+package main
+
+import (
+	"encoding/csv"
+	"fmt"
+	"io"
+	"os"
+)
+
+func main () {
+	reader := csv.NewReader(os.Stdin)
+	for {
+		rec, err := reader.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		fmt.Println(rec)
+	}
 }
 ```
 
 ## Installation
 
-Can be built with "go build" within the source directory, using a version of Go with module support (1.11 or later). Older versions may differ.
+This package can be compiled like any simple Go application, e.g., by installing the Go compiler and in a terminal running "go build" in the source directory.

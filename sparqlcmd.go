@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/csv"
 	"fmt"
 	"github.com/valyala/fastjson"
 	"io/ioutil"
@@ -36,17 +37,17 @@ func process(query string) error {
 	if err != nil {
 		return err
 	}
+	writer := csv.NewWriter(os.Stdout)
 	vars := json.GetArray("head", "vars")
 	bindings := json.GetArray("results", "bindings")
-	for i := range bindings {
-		sp := ""
-		for j := range vars {
-			val := bindings[i].GetStringBytes(string(vars[j].GetStringBytes()), "value")
-			fmt.Printf("%s%q", sp, val)
-			sp = " "
+	strs := make([]string, len(vars))
+	for _, binding := range bindings {
+		for i := range vars {
+			strs[i] = string(binding.GetStringBytes(string(vars[i].GetStringBytes()), "value"))
 		}
-		fmt.Println()
+		writer.Write(strs)
 	}
+	writer.Flush()
 	return nil
 }
 
@@ -57,6 +58,6 @@ func main() {
 	}
 	err = process(string(query))
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 }
